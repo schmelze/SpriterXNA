@@ -1,13 +1,13 @@
 =Spriter XNA=
 
-This is an XNA implementation of the Brashmonkey Spriter beta file format.
+This is an XNA implementation of the [http://www.brashmonkey.com/spriter.htm Brashmonkey Spriter] beta file format.  Note that this supports the pre-Ludnum Dare beta format, so bounding boxes not yet supported.
 
 ==QuickStart==
 This is an example implementation of using Spriter characters in the XNA framework.
 
 If you want to see the library in action, run SpriterBetaXNA program located in the bin directory.
 
-''Note: The sample program requires that the XNA 4.0 runtime framework to be installed. If you do not have this installed on your machine, you can download it from Microsoft at: http://www.microsoft.com/download/en/details.aspx?id=20914 ''
+''Note: The sample program requires that the XNA 4.0 runtime framework to be installed. If you do not have this installed on your machine, you can download it from [http://www.microsoft.com/download/en/details.aspx?id=20914 Microsoft].''
 
 When loaded, you should see the BetaExampleHero standing in the middle of the screen. To switch between the animation sequences, press the spacebar (or the A button on your gamepad). To exit, press the escape key or the back button on the gamepad.
 
