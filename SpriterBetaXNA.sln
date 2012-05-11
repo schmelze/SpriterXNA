@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpriterBetaXNA", "SpriterBetaXNA\SpriterBetaXNA\SpriterBetaXNA.csproj", "{5EC759F7-CFCF-47EF-AC80-0EF55BC3A5D4}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "SpriterBetaXNAContent", "SpriterBetaXNA\SpriterBetaXNAContent\SpriterBetaXNAContent.contentproj", "{6EFE842A-65AF-4568-BE2D-B1453D934C9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpriterBetaPipelineExtension", "SpriterBetaPipelineExtension\SpriterBetaPipelineExtension.csproj", "{846EA15E-803D-4BC9-802E-FFD3B6586196}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpriterBetaRuntime", "SpriterBetaRuntime\SpriterBetaRuntime.csproj", "{0AB2ABE1-E66D-458E-A468-18225E2611AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5EC759F7-CFCF-47EF-AC80-0EF55BC3A5D4}.Debug|x86.ActiveCfg = Debug|x86
+		{5EC759F7-CFCF-47EF-AC80-0EF55BC3A5D4}.Debug|x86.Build.0 = Debug|x86
+		{5EC759F7-CFCF-47EF-AC80-0EF55BC3A5D4}.Release|x86.ActiveCfg = Release|x86
+		{5EC759F7-CFCF-47EF-AC80-0EF55BC3A5D4}.Release|x86.Build.0 = Release|x86
+		{6EFE842A-65AF-4568-BE2D-B1453D934C9B}.Debug|x86.ActiveCfg = Debug|x86
+		{6EFE842A-65AF-4568-BE2D-B1453D934C9B}.Release|x86.ActiveCfg = Release|x86
+		{846EA15E-803D-4BC9-802E-FFD3B6586196}.Debug|x86.ActiveCfg = Debug|x86
+		{846EA15E-803D-4BC9-802E-FFD3B6586196}.Debug|x86.Build.0 = Debug|x86
+		{846EA15E-803D-4BC9-802E-FFD3B6586196}.Release|x86.ActiveCfg = Release|x86
+		{846EA15E-803D-4BC9-802E-FFD3B6586196}.Release|x86.Build.0 = Release|x86
+		{0AB2ABE1-E66D-458E-A468-18225E2611AC}.Debug|x86.ActiveCfg = Debug|x86
+		{0AB2ABE1-E66D-458E-A468-18225E2611AC}.Debug|x86.Build.0 = Debug|x86
+		{0AB2ABE1-E66D-458E-A468-18225E2611AC}.Release|x86.ActiveCfg = Release|x86
+		{0AB2ABE1-E66D-458E-A468-18225E2611AC}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
