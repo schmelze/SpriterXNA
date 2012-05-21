@@ -34,6 +34,9 @@ namespace SpriterBetaRuntime {
     public List<Rectangle> imageRectangles = null;
 
     [ContentSerializer]
+    public List<Vector2> imageHotspots = null;
+
+    [ContentSerializer]
     // list of animation data (frame index, duration of each frame)
     public List<SpriterAnimation> animations = new List<SpriterAnimation>();
 
