@@ -34,6 +34,69 @@ namespace SpriterBetaPipelineExtension {
       // basic XML reader, only pull what we are interested in
       XmlTextReader reader = new XmlTextReader(filename);
 
+      int state = 0;
+      string xmlNodeText = String.Empty, nodeName = String.Empty;
+
+      // load image hotspots
+      string hotspot_filepath = "";
+      float hotspot_x = 0, hotspot_y = 0;
+      Dictionary<string, Vector2> hotspots = new Dictionary<string, Vector2>();
+
+      bool finished = false;
+      if (reader.ReadToFollowing("hotspotarray"))
+      {
+          while (reader.Read())
+          {
+              switch (reader.NodeType)
+              {
+                  case XmlNodeType.Element:
+                      nodeName = reader.Name;
+                      if (nodeName == "hotspot")
+                      {
+                          xmlNodeText = String.Empty;
+                          hotspot_filepath = String.Empty;
+                          hotspot_x = 0;
+                          hotspot_y = 0;
+                      }
+                      break;
+
+                  case XmlNodeType.Text:
+                      xmlNodeText = reader.Value;
+                      break;
+
+                  case XmlNodeType.EndElement:
+                      nodeName = reader.Name;
+                      if (nodeName == "filepath")
+                      {
+                          hotspot_filepath = xmlNodeText;
+                      }
+                      else if (nodeName == "x")
+                      {
+                          hotspot_x = float.Parse(xmlNodeText);
+                      }
+                      else if (nodeName == "y")
+                      {
+                          hotspot_y = float.Parse(xmlNodeText);
+                      }
+                      else if (nodeName == "hotspot")
+                      {
+                          hotspots.Add(hotspot_filepath, new Vector2(hotspot_x, hotspot_y));
+                      }
+                      else if (nodeName == "hotspotarray")
+                      {
+                          finished = true;
+                      }
+                      break;
+              }
+              if (finished) { break; }
+          }
+      }
+      // If hotspot not found, we have an old version of the file
+      if (!finished)
+      {
+          reader = new XmlTextReader(filename);
+      }
+
       // skip to first character
       reader.ReadToFollowing("char");
 
@@ -41,12 +104,11 @@ namespace SpriterBetaPipelineExtension {
       reader.ReadToFollowing("name");
       input.name = reader.ReadElementContentAsString();
 
-      int state = 0;
-      string xmlNodeText, nodeName;
       ImportAnimation animation = null;  // class to build up an animation during parse
       ImportFrame frame = null;          // class to build up a frame definition during parse
       ShadowSubFrame sprite = null;      // class to build up sprite stats during parse
 
+      state = 0;
       nodeName = string.Empty;
       xmlNodeText = string.Empty;
       while (reader.Read()) {
@@ -101,6 +163,15 @@ namespace SpriterBetaPipelineExtension {
                   idx = input.imageFiles.Count;
                   input.imageNames.Add(xmlNodeText, idx);
                   input.imageFiles.Add(xmlNodeText);
+                  if (hotspots.ContainsKey(xmlNodeText))
+                  {
+                      input.imageHotSpots.Add(hotspots[xmlNodeText]);
+                  }
+                  else
+                  {
+                      // If no hotspot information was found in the file, we assume 0,0 = top left corner of the image
+                      input.imageHotSpots.Add(Vector2.Zero);
+                  }
                 }
                 sprite.ImageIdx = idx;
               } else if (nodeName == "color") {
@@ -169,6 +240,7 @@ namespace SpriterBetaPipelineExtension {
             break;
         }
       }
+
       return input;
     }
   }

@@ -53,6 +53,8 @@ namespace SpriterBetaPipelineExtension {
     // list of unique sprite filenames
     public List<string> imageFiles = new List<string>();
 
+    public List<Vector2> imageHotSpots = new List<Vector2>();
+
     // extra index information
     // imageName to imageFile list index
     public Dictionary<string, int> imageNames = new Dictionary<string, int>();

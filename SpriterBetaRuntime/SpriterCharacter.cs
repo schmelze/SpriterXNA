@@ -132,6 +132,9 @@ namespace SpriterBetaRuntime {
       tic += time.ElapsedGameTime;
     }
 
+    Vector2 tmpPosition;
+    SpriteEffects effects;
+
     /// <summary>
     /// Draw the character
     /// </summary>
@@ -139,11 +142,15 @@ namespace SpriterBetaRuntime {
     public void Draw(SpriteBatch spriteBatch) {
       // draw each component of the current frame
       foreach (SpriterSubFrame sprite in character.frames[currentFrame].sprites) {
-        SpriteEffects effects = SpriteEffects.None;  // TODO: pre-calculate this, assuming we don't allow xflip, yflip of full sprite
+        effects = SpriteEffects.None;  // TODO: pre-calculate this, assuming we don't allow xflip, yflip of full sprite
         if (sprite.XFlip) effects |= SpriteEffects.FlipHorizontally;
         if (sprite.YFlip) effects |= SpriteEffects.FlipVertically;
-        spriteBatch.Draw(character.texture, Position + sprite.Position, character.imageRectangles[sprite.ImageIndex],
-          sprite.Tint, sprite.Rotation, Vector2.Zero, sprite.Size, effects, 0);
+
+        tmpPosition = Position;
+        tmpPosition += sprite.Position;
+
+        spriteBatch.Draw(character.texture, tmpPosition, character.imageRectangles[sprite.ImageIndex],
+          sprite.Tint, sprite.Rotation, character.imageHotspots[sprite.ImageIndex], sprite.Size, effects, 0);
       }
     }
   }

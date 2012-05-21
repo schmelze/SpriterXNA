@@ -80,6 +80,8 @@ namespace SpriterBetaPipelineExtension {
     // List containing location of each sprint on single texture
     public List<Rectangle> ImageRectangles = new List<Rectangle>();
 
+    public List<Vector2> ImageHotspots = new List<Vector2>();
+
     // List of animation data
     public List<ShadowAnimation> Animations = new List<ShadowAnimation>();
     // Gloal list of frame definition
