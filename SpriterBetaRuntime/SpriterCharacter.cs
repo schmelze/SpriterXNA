@@ -42,6 +42,9 @@ namespace SpriterBetaRuntime {
     // animation data
     SpriterCharacterData character;
 
+    public bool FlipX;
+    public bool FlipY;
+
     /// <summary>
     /// Construct a new spriter character
     /// </summary>
@@ -132,6 +135,11 @@ namespace SpriterBetaRuntime {
       tic += time.ElapsedGameTime;
     }
 
+    Vector2 tmpPosition;
+    Vector2 tmpOrigin;
+    float tmpRotation;
+    SpriteEffects effects;
+
     /// <summary>
     /// Draw the character
     /// </summary>
@@ -139,11 +147,23 @@ namespace SpriterBetaRuntime {
     public void Draw(SpriteBatch spriteBatch) {
       // draw each component of the current frame
       foreach (SpriterSubFrame sprite in character.frames[currentFrame].sprites) {
-        SpriteEffects effects = SpriteEffects.None;  // TODO: pre-calculate this, assuming we don't allow xflip, yflip of full sprite
-        if (sprite.XFlip) effects |= SpriteEffects.FlipHorizontally;
-        if (sprite.YFlip) effects |= SpriteEffects.FlipVertically;
-        spriteBatch.Draw(character.texture, Position + sprite.Position, character.imageRectangles[sprite.ImageIndex],
-          sprite.Tint, sprite.Rotation, Vector2.Zero, sprite.Size, effects, 0);
+        effects = SpriteEffects.None;  // TODO: pre-calculate this, assuming we don't allow xflip, yflip of full sprite
+        if (sprite.XFlip != FlipX) effects |= SpriteEffects.FlipHorizontally;
+        if (sprite.YFlip != FlipY) effects |= SpriteEffects.FlipVertically;
+
+        tmpOrigin = character.imageHotspots[sprite.ImageIndex];
+        if (FlipX) { tmpOrigin.X = character.imageRectangles[sprite.ImageIndex].Width - tmpOrigin.X; }
+        if (FlipY) { tmpOrigin.Y = character.imageRectangles[sprite.ImageIndex].Height - tmpOrigin.Y; }
+
+        tmpPosition = Position;
+        tmpPosition.X += (sprite.Position.X) * (FlipX ? -1 : 1);
+        tmpPosition.Y += (sprite.Position.Y) * (FlipY ? -1 : 1);
+
+        tmpRotation = sprite.Rotation;
+        if (FlipX != FlipY) { tmpRotation *= -1; }
+
+        spriteBatch.Draw(character.texture, tmpPosition, character.imageRectangles[sprite.ImageIndex],
+          sprite.Tint, tmpRotation, tmpOrigin, sprite.Size, effects, 0);
       }
     }
   }

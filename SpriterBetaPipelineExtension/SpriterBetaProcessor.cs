@@ -81,6 +81,8 @@ namespace SpriterBetaPipelineExtension {
         spriterData.Frames.Add(sframe);
       }
 
+      spriterData.ImageHotspots = input.imageHotSpots;
+
       return spriterData;
     }
 
