@@ -110,6 +110,15 @@ namespace SpriterBetaXNA {
       if ((!newKeyState.IsKeyDown(Keys.Space)) && (prevKeyState.IsKeyDown(Keys.Space))) {
         changeAnimation = true;
       }
+      if ((!newKeyState.IsKeyDown(Keys.X)) && (prevKeyState.IsKeyDown(Keys.X)))
+      {
+          hero.FlipX = !hero.FlipX;
+      }
+      if ((!newKeyState.IsKeyDown(Keys.Y)) && (prevKeyState.IsKeyDown(Keys.Y)))
+      {
+          hero.FlipY = !hero.FlipY;
+      }
+
       prevKeyState = newKeyState;
       prevPadState = newPadState;
 
